@@ -47,7 +47,7 @@ def get_roundtrip_flight(adults="1", children="0", infants="0",
                   kwargs['returning'] + "/" + adults + "/" + children + "/" +
                   infants + "?cabintype=" + cabintype)
             break
-        except HTTPError:
+        except HTTPError as e:
             retry += 1
             time.sleep(1)
     result = {}
@@ -90,7 +90,7 @@ def get_mult_flights(adults="1", children="0", infants="0",
                 kwargs['to'] + "/" + kwargs['departure'] + "/" + adults + "/" +
                 children + "/" + infants + "?cabintype=" + cabintype)
             break
-        except HTTPError:
+        except HTTPError as e:
             retry += 1
             time.sleep(1)
     result = {}
