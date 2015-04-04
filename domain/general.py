@@ -3,6 +3,7 @@ import json
 import gzip
 from io import StringIO, BytesIO
 import os
+import datetime
 
 def send_post(content, url):
     payload = json.loads(content)
@@ -44,3 +45,7 @@ def load_headers():
     except:
         headers = {}
     return headers
+
+def validate_datetime(param):
+    """Check if datetime is approppriate, raises ValueError if not"""
+    datetime.datetime.strptime(param, '%Y-%m-%dT%H:%M')
