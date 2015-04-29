@@ -3,6 +3,7 @@ import json
 import gzip
 from io import StringIO, BytesIO
 import os
+import requests
 import datetime
 
 def send_post(content, url):
@@ -21,13 +22,15 @@ def get(url):
     As such, we must use gzip to decompress it first.
     """
     headers = load_headers()
-    intreq = urllib.request.Request(url, headers=headers)
-    req = urllib.request.urlopen(intreq)
-    buffer = BytesIO(req.read())
-    f_ = gzip.GzipFile(fileobj=buffer)
-    content = f_.read()
-    f_.close()
-    payload = json.loads(content.decode())
+    #intreq = urllib.request.Request(url, headers=headers)
+    #req = urllib.request.urlopen(intreq)
+    #buffer = BytesIO(req.read())
+    #f_ = gzip.GzipFile(fileobj=buffer)
+    #content = f_.read()
+    #f_.close()
+    #payload = json.loads(content.decode())
+    req = requests.get(url, headers=headers)
+    payload = json.loads(req.text)
     return payload
 
 def validate_params(paramlist):
